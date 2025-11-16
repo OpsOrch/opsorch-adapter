@@ -17,6 +17,9 @@ coverage.*
 *.coverprofile
 profile.cov
 
+# Build output
+bin/
+
 # Dependency directories (remove the comment below to include it)
 # vendor/
 
@@ -26,6 +29,7 @@ go.work.sum
 
 # env file
 .env
+.gocache
 
 # Editor/IDE
 # .idea/
