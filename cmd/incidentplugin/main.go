@@ -56,9 +56,6 @@ func main() {
 			}
 			res, err := prov.Query(ctx, query)
 			write(enc, res, err)
-		case "incident.list":
-			res, err := prov.List(ctx)
-			write(enc, res, err)
 		case "incident.get":
 			var payload struct {
 				ID string `json:"id"`

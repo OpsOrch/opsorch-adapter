@@ -22,9 +22,10 @@ This repo is a copy/paste-friendly starter for building an OpsOrch external adap
 ## Building
 
 ```bash
-make test
-make build
-make plugin # builds ./bin/incidentplugin
+make test    # run unit tests
+make build   # build all packages
+make plugin  # builds ./bin/incidentplugin
+make integ   # run integration tests
 ```
 
 ## Configuration
