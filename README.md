@@ -41,6 +41,34 @@ The sample incident provider expects a config like:
 
 Fields are illustrative; change to whatever your provider needs. OpsOrch Core will hand you a decrypted `map[string]any` at runtime.
 
+## CI/CD
+
+The template includes GitHub Actions workflows:
+
+- **CI** (`ci.yml`): Runs tests and linting on every push/PR to main
+- **Release** (`release.yml`): Manual workflow that:
+  - Runs tests and linting
+  - Creates version tags (patch/minor/major)
+  - Builds multi-arch binaries (linux-amd64, linux-arm64, darwin-amd64, darwin-arm64)
+  - Publishes binaries as GitHub release assets
+
+### Pre-Built Binaries
+
+After your first release, users can download pre-built plugin binaries:
+
+```dockerfile
+# Example custom Docker image with your adapter
+FROM ghcr.io/opsorch/opsorch-core:latest
+WORKDIR /opt/opsorch
+
+ADD https://github.com/yourorg/opsorch-yourprovider-adapter/releases/download/v0.1.0/incidentplugin-linux-amd64 ./plugins/incidentplugin
+RUN chmod +x ./plugins/incidentplugin
+
+ENV OPSORCH_INCIDENT_PLUGIN=/opt/opsorch/plugins/incidentplugin
+```
+
+**Note**: Update the plugin name (`incidentplugin`) and capability (`INCIDENT`) to match your adapter's functionality.
+
 ## Production guidance
 
 - Keep adapters stateless; never persist tokens.
