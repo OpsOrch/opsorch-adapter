@@ -92,6 +92,7 @@ func (p *ExampleProvider) Create(ctx context.Context, in schema.CreateIncidentIn
 		Status:    in.Status,
 		Severity:  defaultString(in.Severity, p.cfg.DefaultSeverity),
 		Service:   in.Service,
+		URL:       fmt.Sprintf("https://opsorch.example.com/incidents/%s", id),
 		CreatedAt: now,
 		UpdatedAt: now,
 		Fields:    cloneMap(in.Fields),

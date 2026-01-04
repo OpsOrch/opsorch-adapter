@@ -93,7 +93,10 @@ func main() {
 			testResult("Validate created incident status", fmt.Errorf("status mismatch"))
 		} else if newIncident.Metadata["source"] != "integration-test" {
 			testResult("Validate source metadata", fmt.Errorf("expected source=integration-test, got %v", newIncident.Metadata["source"]))
+		} else if newIncident.URL != fmt.Sprintf("https://opsorch.example.com/incidents/%s", newIncident.ID) {
+			testResult("Validate URL", fmt.Errorf("unexpected URL: %s", newIncident.URL))
 		} else {
+			fmt.Printf("  URL: %s\n", newIncident.URL)
 			testResult("Create incident", nil)
 		}
 	}
